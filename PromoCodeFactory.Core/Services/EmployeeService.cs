@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PromoCodeFactory.WebHost.Controllers
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IRepository<Employee> _employeeRepository;
 
@@ -18,7 +18,7 @@ namespace PromoCodeFactory.WebHost.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        public  async Task CreateEmployee(string firstName, string lastName, string email)
+        public  async Task CreateEmployee(string firstName, string lastName, string email, string role, int promocodeCount)
         {
             Employee employee = new Employee()
             {
@@ -26,8 +26,11 @@ namespace PromoCodeFactory.WebHost.Controllers
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName,
-                Roles = new List<Role>(),
-                AppliedPromocodesCount = 0
+                Roles = new List<Role>() 
+                {
+                    
+                },
+                AppliedPromocodesCount = promocodeCount
             };
             await _employeeRepository.AddAsync(employee);
         }

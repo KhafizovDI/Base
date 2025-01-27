@@ -11,5 +11,11 @@ namespace PromoCodeFactory.WebHost.Models
 
         public string Email { get; set; }
 
+        public string Name { get; set; }
+
+        public string Role { get; set; }
+
+        public int PromocodesCount { get; set; }
+
     }
 }

@@ -17,10 +17,12 @@ namespace PromoCodeFactory.WebHost.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IRepository<Employee> _employeeRepository;
+        private readonly IEmployeeService _employeeService;
 
-        public EmployeesController(IRepository<Employee> employeeRepository)
+        public EmployeesController(IRepository<Employee> employeeRepository, IEmployeeService employeeService)
         {
             _employeeRepository = employeeRepository;
+            _employeeService = employeeService;
         }
 
         /// <summary>
@@ -81,8 +83,8 @@ namespace PromoCodeFactory.WebHost.Controllers
         {
             try
             {
-                await (new EmployeeService(_employeeRepository))
-                    .CreateEmployee(request.FirstName, request.LastName, request.Email);
+                await _employeeService
+                    .CreateEmployee(request.FirstName, request.LastName, request.Email, request.Role, request.PromocodesCount);
                 return Created();
             }
             catch (Exception ex)
@@ -100,7 +102,7 @@ namespace PromoCodeFactory.WebHost.Controllers
         {
             try
             {
-                await (new EmployeeService(_employeeRepository))
+                await _employeeService
                      .UpdateEmployee(request.Id, request.FirstName, request.LastName, request.Email);
                 return Ok();
             }

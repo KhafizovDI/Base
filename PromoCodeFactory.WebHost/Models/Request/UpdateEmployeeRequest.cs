@@ -12,8 +12,8 @@ namespace PromoCodeFactory.WebHost.Models
 
         public string Email { get; set; }
 
-        public List<RoleItemResponse> Roles { get; set; }
+        public string Role { get; set; }
 
-        public int AppliedPromocodesCount { get; set; }
+        public int PromocodesCount { get; set; }
     }
 }

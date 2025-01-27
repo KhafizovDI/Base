@@ -15,20 +15,25 @@ namespace PromoCodeFactory.WebHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
-            services.AddSingleton(typeof(IRepository<Employee>), (x) => 
-                new InMemoryRepository<Employee>(FakeDataFactory.Employees));
-            
-            services.AddSingleton(typeof(IRepository<Role>), (x) => 
-                new InMemoryRepository<Role>(FakeDataFactory.Roles));
-            
+
+            services.AddSingleton<IRepository<Employee>>((x) =>
+                new Repository<Employee>(FakeDataFactory.Employees));
+
+            services.AddSingleton(typeof(IRepository<Role>), (x) =>
+                new Repository<Role>(FakeDataFactory.Roles));
+
+            services.AddSingleton<IRoleRepository>((x) => new RoleRepository(FakeDataFactory.Roles));
+
+            services.AddSingleton<IEmployeeService, EmployeeService>();
+
+
             services.AddOpenApiDocument(options =>
             {
                 options.Title = "PromoCode Factory API Doc";
                 options.Version = "1.0";
             });
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,7 +50,7 @@ namespace PromoCodeFactory.WebHost
             {
                 x.DocExpansion = "list";
             });
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

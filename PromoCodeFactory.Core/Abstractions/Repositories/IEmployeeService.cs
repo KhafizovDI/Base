@@ -6,8 +6,9 @@ using PromoCodeFactory.Core.Domain.Administration;
 
 namespace PromoCodeFactory.Core.Abstractions.Repositories
 {
-    public interface IRoleRepository
+    public interface IEmployeeService
     {
-        Task<Role> GetByNameAsync(string name);
+        Task CreateEmployee(string firstName, string lastName, string email, string role, int promocodeCount);
+        Task UpdateEmployee(Guid id, string firstName, string lastName, string email);
     }
 }

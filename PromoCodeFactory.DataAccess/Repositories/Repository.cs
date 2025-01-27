@@ -7,12 +7,12 @@ using PromoCodeFactory.Core.Domain;
 using PromoCodeFactory.Core.Domain.Administration;
 namespace PromoCodeFactory.DataAccess.Repositories
 {
-    public class InMemoryRepository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : BaseEntity
     {
         protected List<TEntity> Data { get; set; }
 
-        public InMemoryRepository(IEnumerable<TEntity> data)
+        public Repository(IEnumerable<TEntity> data)
         {
             Data = data.ToList();
         }

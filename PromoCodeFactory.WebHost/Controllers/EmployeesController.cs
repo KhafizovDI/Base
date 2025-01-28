@@ -63,6 +63,7 @@ namespace PromoCodeFactory.WebHost.Controllers
                 Email = employee.Email,
                 Roles = employee.Roles.Select(x => new RoleItemResponse()
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Description = x.Description
                 }).ToList(),
@@ -104,7 +105,7 @@ namespace PromoCodeFactory.WebHost.Controllers
             {
                 await _employeeService
                      .UpdateEmployee(id, request.FirstName, request.LastName, request.Email, request.Role, request.PromocodesCount);
-                return Ok();
+                return Ok($"You made a UPDATE employee with id = {id}");
             }
             catch (Exception ex) 
             {
@@ -127,7 +128,7 @@ namespace PromoCodeFactory.WebHost.Controllers
                 return NotFound();
 
             await _employeeRepository.DeleteAsync(id);
-            return Ok($"You made a DELETE emloyees with id = {id} ");
+            return Ok($"You made a DELETE employee with id = {id}");
         }
 
     }

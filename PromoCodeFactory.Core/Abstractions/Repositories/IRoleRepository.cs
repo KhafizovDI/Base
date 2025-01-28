@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using PromoCodeFactory.Core.Domain;
-using PromoCodeFactory.Core.Domain.Administration;
+﻿using System.Threading.Tasks;
 
 namespace PromoCodeFactory.Core.Abstractions.Repositories
 {
-    public interface IRoleRepository<Role>
+    public interface IRoleRepository<Role>    
     {
         Task<Role> GetByNameAsync(string name);
     }

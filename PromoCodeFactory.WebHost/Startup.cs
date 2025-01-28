@@ -18,8 +18,8 @@ namespace PromoCodeFactory.WebHost
 
             services.AddSingleton<IRepository<Employee>>((x) =>
                 new Repository<Employee>(FakeDataFactory.Employees));
-
-            services.AddSingleton(typeof(IRepository<Role>), (x) =>
+            
+            services.AddSingleton<IRepository<Role>>((x) =>
                 new Repository<Role>(FakeDataFactory.Roles));
 
             services.AddSingleton<IRoleRepository<Role>>((x) => new RoleRepository(FakeDataFactory.Roles));

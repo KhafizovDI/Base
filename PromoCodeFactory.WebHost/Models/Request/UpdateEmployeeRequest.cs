@@ -5,7 +5,8 @@ namespace PromoCodeFactory.WebHost.Models
 {
     public class UpdateEmployeeRequest
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -15,5 +16,6 @@ namespace PromoCodeFactory.WebHost.Models
         public string Role { get; set; }
 
         public int PromocodesCount { get; set; }
+
     }
 }

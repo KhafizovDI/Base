@@ -12,10 +12,13 @@ namespace PromoCodeFactory.WebHost.Controllers
     public class EmployeeService : IEmployeeService
     {
         private readonly IRepository<Employee> _employeeRepository;
+        private readonly IRoleRepository<Role> _roleRepository;
 
-        public EmployeeService(IRepository<Employee> employeeRepository)
+        public EmployeeService(IRepository<Employee> employeeRepository, IRoleRepository<Role> roleRepository)
         {
             _employeeRepository = employeeRepository;
+            _roleRepository = roleRepository;
+
         }
 
         public  async Task CreateEmployee(string firstName, string lastName, string email, string role, int promocodeCount)
@@ -28,23 +31,29 @@ namespace PromoCodeFactory.WebHost.Controllers
                 LastName = lastName,
                 Roles = new List<Role>() 
                 {
-                    
+                    await _roleRepository.GetByNameAsync(role)
                 },
                 AppliedPromocodesCount = promocodeCount
             };
             await _employeeRepository.AddAsync(employee);
         }
-  
-        public async Task UpdateEmployee(Guid id, string firstName, string lastName, string email)
+
+        public async Task UpdateEmployee(Guid id, string firstName, string lastName, string email, string role, int promocodeCount)
         {
             Employee employee = new Employee()
             {
                 Id = id,
                 Email = email,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
+                Roles = new List<Role>()
+                {
+                    await _roleRepository.GetByNameAsync(role)
+                },
+                AppliedPromocodesCount = promocodeCount
             };
             await _employeeRepository.UpdateAsync(employee);
         }
+
     }
 }

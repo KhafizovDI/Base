@@ -22,7 +22,7 @@ namespace PromoCodeFactory.WebHost
             services.AddSingleton(typeof(IRepository<Role>), (x) =>
                 new Repository<Role>(FakeDataFactory.Roles));
 
-            services.AddSingleton<IRoleRepository>((x) => new RoleRepository(FakeDataFactory.Roles));
+            services.AddSingleton<IRoleRepository<Role>>((x) => new RoleRepository(FakeDataFactory.Roles));
 
             services.AddSingleton<IEmployeeService, EmployeeService>();
 

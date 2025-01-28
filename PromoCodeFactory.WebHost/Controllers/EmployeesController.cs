@@ -97,13 +97,13 @@ namespace PromoCodeFactory.WebHost.Controllers
         /// Обновить данные сотрудника
         /// </summary>
         /// <returns></returns>
-        [HttpPut()]
-        public async Task<ActionResult> UpdateEmployeeAsync([FromBody] UpdateEmployeeRequest request)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult> UpdateEmployeeAsync(Guid id, [FromBody] UpdateEmployeeRequest request)
         {
             try
             {
                 await _employeeService
-                     .UpdateEmployee(request.Id, request.FirstName, request.LastName, request.Email);
+                     .UpdateEmployee(id, request.FirstName, request.LastName, request.Email, request.Role, request.PromocodesCount);
                 return Ok();
             }
             catch (Exception ex) 

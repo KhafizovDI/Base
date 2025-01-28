@@ -6,7 +6,7 @@ using PromoCodeFactory.Core.Domain.Administration;
 
 namespace PromoCodeFactory.Core.Abstractions.Repositories
 {
-    public interface IRoleRepository
+    public interface IRoleRepository<Role>
     {
         Task<Role> GetByNameAsync(string name);
     }

@@ -7,7 +7,7 @@ using PromoCodeFactory.Core.Domain;
 using PromoCodeFactory.Core.Domain.Administration;
 namespace PromoCodeFactory.DataAccess.Repositories
 {
-    public class RoleRepository : IRoleRepository
+    public class RoleRepository : IRoleRepository<Role>
     {    
         protected IEnumerable<Role> Roles;
 
